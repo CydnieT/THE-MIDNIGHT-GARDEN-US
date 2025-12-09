@@ -8,50 +8,82 @@
   <style>
     body {
       margin: 0;
+      background-color: #0b0b0b;
       font-family: "Playfair Display", serif;
-      background: #000;
-      color: #d4b06a;
+      color: #e9c88f;
       text-align: center;
     }
 
     header {
-      padding: 120px 20px;
-      background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+      padding: 40px 20px;
+      background: #000;
+      border-bottom: 1px solid #3b2f1a;
     }
 
-    h1 {
-      font-size: 48px;
-      letter-spacing: 2px;
+    nav a {
+      color: #e9c88f;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .hero img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      opacity: 0.92;
+    }
+
+    .section {
+      padding: 50px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      border-bottom: 1px solid #3b2f1a;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .product {
+      background: #111;
+      padding: 20px;
+      border: 1px solid #3b2f1a;
+      border-radius: 8px;
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 6px;
       margin-bottom: 10px;
-    }
-
-    p.subtitle {
-      font-size: 20px;
-      opacity: 0.85;
-      margin-bottom: 30px;
     }
 
     .btn {
       display: inline-block;
-      padding: 14px 32px;
-      border: 1px solid #d4b06a;
-      color: #d4b06a;
-      font-size: 20px;
+      background: transparent;
+      color: #e9c88f;
+      border: 1px solid #e9c88f;
+      padding: 10px 20px;
+      margin-top: 10px;
       text-decoration: none;
+      font-size: 16px;
+      border-radius: 4px;
       transition: 0.3s;
-      margin: 10px;
     }
 
     .btn:hover {
-      background: #d4b06a;
-      color: black;
+      background: #e9c88f;
+      color: #000;
     }
 
     footer {
-      margin-top: 80px;
-      padding: 40px 0;
+      padding: 40px;
       font-size: 14px;
-      opacity: 0.65;
+      opacity: 0.7;
     }
   </style>
 </head>
@@ -60,23 +92,60 @@
 
 <header>
   <h1>THE MIDNIGHT GARDEN</h1>
-  <p class="subtitle">Magical offerings · Rituals · Wealth Workings · Sigils</p>
-
-  <!-- STRIPE CHECKOUT BUTTON -->
-  <a class="btn" href="https://buy.stripe.com/YOUR_STRIPE_LINK" target="_blank">
-    JOIN THE EMPRESS DROP
-  </a>
-
-  <br>
-
-  <!-- DASHBOARD LINK -->
-  <a class="btn" href="dashboard.html">
-    MEMBER DASHBOARD
-  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="https://themidnightgardenus.etsy.com" target="_blank">Etsy Shop</a>
+    <a href="dashboard.html">Wealth Dashboard</a>
+  </nav>
 </header>
 
+<div class="hero">
+  <img src="images/etsy-banner.png" alt="Midnight Garden Banner">
+</div>
+
+<section class="section">
+  <h2>Shop Magical Offerings</h2>
+  <p>Digital planners, ritual tools, and dark feminine wealth systems.</p>
+</section>
+
+<section class="section">
+  <h2>Featured Products</h2>
+
+  <div class="product-grid">
+
+    <div class="product">
+      <img src="images/mg-main-cover.webp" alt="Master Cover">
+      <h3>Midnight Garden Master Book</h3>
+      <p>$22 — Digital Download</p>
+      <a class="btn" href="https://themidnightgardenus.etsy.com" target="_blank">Buy on Etsy</a>
+    </div>
+
+    <div class="product">
+      <img src="images/midnight-routine-planner.png" alt="Routine Planner">
+      <h3>Midnight Routine Planner</h3>
+      <p>$12 — Digital Download</p>
+      <a class="btn" href="https://themidnightgardenus.etsy.com" target="_blank">Buy on Etsy</a>
+    </div>
+
+    <div class="product">
+      <img src="images/quit-gas-kit.png" alt="Quit Gas Station Weed Kit">
+      <h3>Herbal Smoking Blend Kit</h3>
+      <p>$9 — Digital Download</p>
+      <a class="btn" href="https://themidnightgardenus.etsy.com" target="_blank">Buy on Etsy</a>
+    </div>
+
+    <div class="product">
+      <img src="images/wealth-altar-dashboard.png" alt="Wealth Dashboard">
+      <h3>Wealth Altar Dashboard</h3>
+      <p>$15 — Digital Download</p>
+      <a class="btn" href="https://themidnightgardenus.etsy.com" target="_blank">Buy on Etsy</a>
+    </div>
+
+  </div>
+</section>
+
 <footer>
-  © 2025 The Midnight Garden · Murphy Made
+  © 2025 The Midnight Garden by Murphy Made  
 </footer>
 
 </body>
