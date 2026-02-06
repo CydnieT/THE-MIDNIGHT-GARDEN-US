@@ -7,7 +7,60 @@
 
   <style>
     body {
-      margin: 0;
+     <!-- PAYWALL OVERLAY -->
+<div id="paywall" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,5,0.92);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+">
+
+  <div style="
+    max-width: 420px;
+    padding: 32px;
+    border: 1px solid #3a2f23;
+    background: #0b0b0b;
+    border-radius: 10px;
+  ">
+    <h2 style="
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    ">
+      Subscribers Only
+    </h2>
+
+    <p style="
+      color: #d2c4ab;
+      font-size: 15px;
+      margin-bottom: 22px;
+    ">
+      Access to the Empress Dashboard requires an active subscription.
+    </p>
+
+    <!-- STRIPE BUY BUTTON -->
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
+    <stripe-buy-button
+      buy-button-id="buy_btn_1Sxu7QGV2xsfnUdimr2Leoaq"
+      publishable-key="pk_live_51SZ0N2GV2xsfnUdiE23lOoDiQOQWGsOblZ87tDXAjSY7P5B2LfKCwNDOJfmosf2uXVfRXoUfQAT9JdxW2FyLd5z80087XK334j">
+    </stripe-buy-button>
+
+    <p style="
+      font-size: 12px;
+      color: #8c806a;
+      margin-top: 18px;
+    ">
+      Already subscribed? Use your confirmation email to return.
+    </p>
+  </div>
+</div>
+ margin: 0;
       background: #0b0b0b;
       font-family: "Inter", sans-serif;
       color: #f1e9d8;
@@ -204,12 +257,6 @@
     <div class="card">
       <img src="images/midnight-routine-planner.png" alt="Midnight Routine Planner">
       <h3>Midnight Routine Planner</h3>
-      <a href="#">Download</a>
-    </div>
-
-    <div class="card">
-      <img src="images/quit-gas-kit.png" alt="Herbal Blend Kit">
-	  <h3>Herbal Grimoire</h3>
       <a href="#">Download</a>
     </div>
 
