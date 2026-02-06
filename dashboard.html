@@ -7,60 +7,7 @@
 
   <style>
     body {
-     <!-- PAYWALL OVERLAY -->
-<div id="paywall" style="
-  position: fixed;
-  inset: 0;
-  background: rgba(5,5,5,0.92);
-  backdrop-filter: blur(6px);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-">
-
-  <div style="
-    max-width: 420px;
-    padding: 32px;
-    border: 1px solid #3a2f23;
-    background: #0b0b0b;
-    border-radius: 10px;
-  ">
-    <h2 style="
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    ">
-      Subscribers Only
-    </h2>
-
-    <p style="
-      color: #d2c4ab;
-      font-size: 15px;
-      margin-bottom: 22px;
-    ">
-      Access to the Empress Dashboard requires an active subscription.
-    </p>
-
-    <!-- STRIPE BUY BUTTON -->
-    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
-
-    <stripe-buy-button
-      buy-button-id="buy_btn_1Sxu7QGV2xsfnUdimr2Leoaq"
-      publishable-key="pk_live_51SZ0N2GV2xsfnUdiE23lOoDiQOQWGsOblZ87tDXAjSY7P5B2LfKCwNDOJfmosf2uXVfRXoUfQAT9JdxW2FyLd5z80087XK334j">
-    </stripe-buy-button>
-
-    <p style="
-      font-size: 12px;
-      color: #8c806a;
-      margin-top: 18px;
-    ">
-      Already subscribed? Use your confirmation email to return.
-    </p>
-  </div>
-</div>
- margin: 0;
+      margin: 0;
       background: #0b0b0b;
       font-family: "Inter", sans-serif;
       color: #f1e9d8;
@@ -99,7 +46,9 @@
 
     .hero {
       text-align: center;
-      padding: 60px 20px;
+      padding: 60px 20px 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .hero h1 {
@@ -112,6 +61,8 @@
     .hero p {
       font-size: 16px;
       color: #d2c4ab;
+      margin: 0 auto;
+      line-height: 1.6;
     }
 
     .section {
@@ -129,6 +80,7 @@
     .section p {
       color: #c8b89d;
       margin-bottom: 25px;
+      line-height: 1.6;
     }
 
     .grid {
@@ -182,91 +134,185 @@
       border-top: 1px solid #3a2f23;
       margin-top: 50px;
     }
+
+    /* ===== PAYWALL ===== */
+    #paywall {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(1200px 800px at 50% 20%, rgba(184,156,89,.12), rgba(0,0,0,.94));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .paywall-box {
+      width: 100%;
+      max-width: 760px;
+      border: 1px solid #3a2f23;
+      background: rgba(10,10,10,.86);
+      border-radius: 12px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    }
+
+    .paywall-box h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      margin: 0 0 10px;
+      letter-spacing: 1px;
+    }
+
+    .paywall-box p {
+      margin: 0 auto 18px;
+      color: #d2c4ab;
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: #9f927a;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* Hide dashboard content until unlocked */
+    #dashboard-content {
+      display: none;
+    }
+
+    /* Optional: prevent scroll while paywall is up */
+    body.locked {
+      overflow: hidden;
+    }
   </style>
 </head>
 
-<body>
-
+<body class="locked">
 <header>
   <div class="logo">THE MIDNIGHT GARDEN</div>
   <nav>
     <a href="index.html">Home</a>
     <a href="dashboard.html">Dashboard</a>
-    <a href="https://themidnightgardenus.etsy.com" target="_blank">Etsy Shop</a>
+    <a href="https://themidnightgardenus.etsy.com" target="_blank" rel="noopener">Etsy Shop</a>
   </nav>
 </header>
 
-<div class="hero">
-  <h1>Empress Dashboard</h1>
-  <p>Your personal ritual command center. All tools. All drops. All in one place.</p>
+<!-- PAYWALL (NO SNEAK PEEK) -->
+<section id="paywall" aria-label="Dashboard paywall">
+  <div class="paywall-box">
+    <h2>Empress Dashboard Access</h2>
+    <p>
+      Pay first. Then you enter.<br>
+      $27/year for permanent tools + monthly drops.
+    </p>
 
-  <!-- TODO: Paste your Stripe yearly subscription payment link below -->
-  <div style="margin-top: 16px;">
-   <a class="button" href="https://buy.stripe.com/eVqcN5ctF2vnaU370G14401" aria-label="Subscribe to The Midnight Garden Dashboard">Subscribe ($27/year)</a>
+    <!-- STRIPE BUY BUTTON -->
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
+    <stripe-buy-button
+      buy-button-id="buy_btn_1Sxu7QGV2xsfnUdimr2Leoaq"
+      publishable-key="pk_live_51SZ0N2GV2xsfnUdiE23lOoDiQOQWGsOblZ87tDXAjSY7P5B2LfKCwNDOJfmosf2uXVfRXoUfQAT9JdxW2FyLd5z80087XK334j">
+    </stripe-buy-button>
+
+    <div class="tiny">
+      Already paid? You must be redirected back here with access enabled.<br>
+      If your Stripe redirect isn’t set yet, set it to: <b>dashboard.html?paid=1</b>
+    </div>
   </div>
+</section>
+
+<!-- DASHBOARD CONTENT (UNLOCKED ONLY) -->
+<div id="dashboard-content">
+  <div class="hero">
+    <h1>Empress Dashboard</h1>
+    <p>Your personal command center. Tools + drops. One place.</p>
+  </div>
+
+  <!-- MONTHLY DROP -->
+  <section class="section">
+    <h2>January Gate 0 Drop</h2>
+    <p>New drops unlock monthly. Download your pages and wallpapers below.</p>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/midnight-garden-collection-cover.png" alt="Ritual PDF Portrait">
+        <h3>Drop PDF (Portrait)</h3>
+        <a href="#" onclick="return false;">Download</a>
+      </div>
+
+      <div class="card">
+        <img src="images/mg-main-cover.webp" alt="Ritual PDF Square">
+        <h3>Drop PDF (Square)</h3>
+        <a href="#" onclick="return false;">Download</a>
+      </div>
+
+      <div class="card">
+        <img src="images/dark-fem-lux-designs.png" alt="Wallpaper 1">
+        <h3>Wallpaper 1</h3>
+        <a href="#" onclick="return false;">Download</a>
+      </div>
+
+      <div class="card">
+        <img src="images/dark-fem-oracle-journal.png" alt="Wallpaper 2">
+        <h3>Wallpaper 2</h3>
+        <a href="#" onclick="return false;">Download</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERMANENT TOOLS -->
+  <section class="section">
+    <h2>Permanent Tools</h2>
+    <p>Your core Midnight Garden assets. Use these every month.</p>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/wealth-altar-dashboard.png" alt="Wealth Altar Dashboard">
+        <h3>Wealth Altar Dashboard</h3>
+        <a href="#" onclick="return false;">Download</a>
+      </div>
+
+      <div class="card">
+        <img src="images/midnight-routine-planner.png" alt="Midnight Routine Planner">
+        <h3>Midnight Routine Planner</h3>
+        <a href="#" onclick="return false;">Download</a>
+      </div>
+
+      <div class="card">
+        <img src="images/quit-gas-kit.png" alt="Herbal Blend Recipe">
+        <h3>Herbal Blend Recipe</h3>
+        <a href="#" onclick="return false;">Download</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © The Midnight Garden · Murphy Made · 2026
+  </footer>
 </div>
 
-<!-- MONTHLY DROP -->
-<section class="section">
-  <h2>January Gate 0 Drop</h2>
-  <p>New drops unlock monthly. Download your ritual pages and wallpapers below.</p>
+<script>
+  // Unlock rule: only show dashboard when URL has ?paid=1 (or ?paid=true)
+  const params = new URLSearchParams(window.location.search);
+  const paid = params.get("paid");
 
-  <div class="grid">
-    
-    <div class="card">
-      <img src="images/midnight-garden-collection-cover.png" alt="Portrait Ritual PDF">
-      <h3>Ritual PDF (Portrait)</h3>
-      <a href="#">Download</a>
-    </div>
+  const isUnlocked = (paid === "1" || paid === "true" || paid === "yes");
 
-    <div class="card">
-      <img src="images/mg-main-cover.webp" alt="Square Ritual PDF">
-      <h3>Ritual PDF (Square)</h3>
-      <a href="#">Download</a>
-    </div>
-
-    <div class="card">
-      <img src="images/dark-fem-lux-designs.png" alt="January Wallpaper">
-      <h3>Wallpaper 1</h3>
-      <a href="#">Download</a>
-    </div>
-
-    <div class="card">
-      <img src="images/dark-fem-oracle-journal.png" alt="January Wallpaper 2">
-      <h3>Wallpaper 2</h3>
-      <a href="#">Download</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- PERMANENT TOOLS -->
-<section class="section">
-  <h2>Permanent Tools</h2>
-  <p>Your core Midnight Garden assets — use these every month.</p>
-
-  <div class="grid">
-
-    <div class="card">
-      <img src="images/wealth-altar-dashboard.png" alt="Wealth Altar Dashboard">
-      <h3>Wealth Altar Dashboard</h3>
-      <a href="#">Download</a>
-    </div>
-
-    <div class="card">
-      <img src="images/midnight-routine-planner.png" alt="Midnight Routine Planner">
-      <h3>Midnight Routine Planner</h3>
-      <a href="#">Download</a>
-    </div>
-
-  </div>
-</section>
-
-<footer>
-  © The Midnight Garden · Murphy Made · 2025  
-</footer>
+  if (isUnlocked) {
+    document.body.classList.remove("locked");
+    document.getElementById("paywall").style.display = "none";
+    document.getElementById("dashboard-content").style.display = "block";
+  } else {
+    // Keep it locked. No preview. No scroll. No dashboard visible.
+    document.body.classList.add("locked");
+    document.getElementById("paywall").style.display = "flex";
+    document.getElementById("dashboard-content").style.display = "none";
+  }
+</script>
 
 </body>
 </html>
-<a class="button" href="https://buy.stripe.com/eVqcN5ctF2vnaU370G14401" aria-label="Subscribe to The Midnight Garden Dashboard">Subscribe ($27/year)</a>
