@@ -135,7 +135,7 @@
       margin-top: 50px;
     }
 
-    /* ===== PAYWALL ===== */
+    /* PAYWALL */
     #paywall {
       position: fixed;
       inset: 0;
@@ -148,234 +148,110 @@
     }
 
     .paywall-box {
-      width: 100%;
       max-width: 760px;
       border: 1px solid #3a2f23;
       background: rgba(10,10,10,.86);
       border-radius: 12px;
       padding: 28px 22px;
       text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,.6);
     }
 
-    .paywall-box h2 {
-      font-family: "Playfair Display", serif;
-      font-size: 28px;
-      margin: 0 0 10px;
-      letter-spacing: 1px;
-    }
-
-    .paywall-box p {
-      margin: 0 auto 18px;
-      color: #d2c4ab;
-      line-height: 1.6;
-      max-width: 560px;
-    }
-
-    .tiny {
-      font-size: 12px;
-      color: #9f927a;
-      margin-top: 14px;
-      line-height: 1.5;
-    }
-
-    .tiny code {
-      color: #f1e9d8;
-    }
-
-    /* Hide dashboard content until unlocked */
     #dashboard-content {
       display: none;
     }
 
-    /* Optional: prevent scroll while paywall is up */
     body.locked {
       overflow: hidden;
     }
-
-    /* Owner tools (for testing) */
-    .owner-tools {
-      margin-top: 14px;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .owner-tools button {
-      background: transparent;
-      color: #f1e9d8;
-      border: 1px solid rgba(241,233,216,.25);
-      padding: 8px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 12px;
-      letter-spacing: .6px;
-    }
-    .owner-tools button:hover { border-color: #b89c59; }
-
   </style>
 </head>
 
 <body class="locked">
+
 <header>
   <div class="logo">THE MIDNIGHT GARDEN</div>
   <nav>
     <a href="index.html">Home</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="https://themidnightgardenus.etsy.com" target="_blank" rel="noopener">Etsy Shop</a>
+    <a href="dashboard.html" aria-current="page">Dashboard</a>
   </nav>
 </header>
 
-<!-- PAYWALL (NO SNEAK PEEK) -->
-<section id="paywall" aria-label="Dashboard paywall">
+<!-- PAYWALL -->
+<section id="paywall">
   <div class="paywall-box">
     <h2>Empress Dashboard Access</h2>
-    <p>
-      Pay first. Then you enter.<br>
-      $27/year for permanent tools + monthly drops.
-    </p>
+    <p>Pay once. Then you enter.</p>
 
-    <!-- STRIPE BUY BUTTON -->
     <script async src="https://js.stripe.com/v3/buy-button.js"></script>
     <stripe-buy-button
       buy-button-id="buy_btn_1Sxu7QGV2xsfnUdimr2Leoaq"
       publishable-key="pk_live_51SZ0N2GV2xsfnUdiE23lOoDiQOQWGsOblZ87tDXAjSY7P5B2LfKCwNDOJfmosf2uXVfRXoUfQAT9JdxW2FyLd5z80087XK334j">
     </stripe-buy-button>
-
-    <div class="tiny">
-      After purchase, Stripe should redirect here once with <code>?paid=1</code> and we’ll remember access on this device.<br>
-      Redirect URL should be:<br>
-      <code>https://cydniet.github.io/THE-MIDNIGHT-GARDEN-US/dashboard.html?paid=1</code>
-    </div>
-
-    <div class="owner-tools" aria-label="Owner tools">
-      <button type="button" id="btn-owner-unlock">Owner Unlock (this device)</button>
-      <button type="button" id="btn-owner-reset">Reset Access (this device)</button>
-    </div>
   </div>
 </section>
 
-<!-- DASHBOARD CONTENT (UNLOCKED ONLY) -->
+<!-- DASHBOARD -->
 <div id="dashboard-content">
+
   <div class="hero">
     <h1>Empress Dashboard</h1>
-    <p>Your personal command center. Tools + drops. One place.</p>
+    <p>Your personal command center.</p>
   </div>
 
-  <!-- MONTHLY DROP -->
   <section class="section">
     <h2>January Gate 0 Drop</h2>
-    <p>New drops unlock monthly. Download your pages and wallpapers below.</p>
 
     <div class="grid">
       <div class="card">
-        <img src="images/midnight-garden-collection-cover.png" alt="Ritual PDF Portrait">
+        <img src="images/midnight-garden-collection-cover.png">
         <h3>Drop PDF (Portrait)</h3>
-        <a href="#" onclick="return false;">Download</a>
+        <a href="downloads/gate0-portrait.pdf" download>Download</a>
       </div>
 
       <div class="card">
-        <img src="images/mg-main-cover.webp" alt="Ritual PDF Square">
+        <img src="images/mg-main-cover.webp">
         <h3>Drop PDF (Square)</h3>
-        <a href="#" onclick="return false;">Download</a>
-      </div>
-
-      <div class="card">
-        <img src="images/dark-fem-lux-designs.png" alt="Wallpaper 1">
-        <h3>Wallpaper 1</h3>
-        <a href="#" onclick="return false;">Download</a>
-      </div>
-
-      <div class="card">
-        <img src="images/dark-fem-oracle-journal.png" alt="Wallpaper 2">
-        <h3>Wallpaper 2</h3>
-        <a href="#" onclick="return false;">Download</a>
+        <a href="downloads/gate0-square.pdf" download>Download</a>
       </div>
     </div>
   </section>
 
-  <!-- PERMANENT TOOLS -->
   <section class="section">
     <h2>Permanent Tools</h2>
-    <p>Your core Midnight Garden assets. Use these every month.</p>
 
     <div class="grid">
       <div class="card">
-        <img src="images/wealth-altar-dashboard.png" alt="Wealth Altar Dashboard">
+        <img src="images/wealth-altar-dashboard.png">
         <h3>Wealth Altar Dashboard</h3>
-        <a href="#" onclick="return false;">Download</a>
+        <a href="downloads/wealth-altar.pdf" download>Download</a>
       </div>
 
       <div class="card">
-        <img src="images/midnight-routine-planner.png" alt="Midnight Routine Planner">
+        <img src="images/midnight-routine-planner.png">
         <h3>Midnight Routine Planner</h3>
-        <a href="#" onclick="return false;">Download</a>
-      </div>
-
-      <div class="card">
-        <img src="images/quit-gas-kit.png" alt="Herbal Blend Recipe">
-        <h3>Herbal Blend Recipe</h3>
-        <a href="#" onclick="return false;">Download</a>
+        <a href="downloads/midnight-routine.pdf" download>Download</a>
       </div>
     </div>
   </section>
 
   <footer>
-    © The Midnight Garden · Murphy Made · 2026
+    © The Midnight Garden · 2026
   </footer>
 </div>
 
 <script>
-  // ===== FIXED PAYWALL LOGIC (PERSISTENT) =====
-  // Your old code ONLY unlocked when ?paid=1 was present. That's why it "kept making you pay".
-  // This version stores access in localStorage after the first successful redirect.
-
-  const ACCESS_KEY = "TMG_DASH_ACCESS_v1";
-  const params = new URLSearchParams(window.location.search);
-  const paid = params.get("paid");
-
-  const paidThisVisit = (paid === "1" || paid === "true" || paid === "yes");
-
-  // If Stripe sends ?paid=1, remember access on this device
-  if (paidThisVisit) {
-    localStorage.setItem(ACCESS_KEY, "true");
-
-    // Clean URL so users can bookmark / return without ?paid=1
+  const params = new URLSearchParams(location.search);
+  if (params.get("paid") === "1") {
+    localStorage.setItem("TMG_ACCESS", "true");
     params.delete("paid");
-    const cleanUrl = window.location.pathname + (params.toString() ? "?" + params.toString() : "");
-    window.history.replaceState({}, "", cleanUrl);
+    history.replaceState({}, "", location.pathname);
   }
 
-  function lock() {
-    document.body.classList.add("locked");
-    document.getElementById("paywall").style.display = "flex";
-    document.getElementById("dashboard-content").style.display = "none";
-  }
-
-  function unlock() {
+  if (localStorage.getItem("TMG_ACCESS") === "true") {
     document.body.classList.remove("locked");
     document.getElementById("paywall").style.display = "none";
     document.getElementById("dashboard-content").style.display = "block";
   }
-
-  // Determine access
-  const hasAccess = (localStorage.getItem(ACCESS_KEY) === "true");
-
-  // Apply state
-  if (hasAccess) unlock();
-  else lock();
-
-  // Owner tools (testing / admin)
-  document.getElementById("btn-owner-unlock").addEventListener("click", () => {
-    localStorage.setItem(ACCESS_KEY, "true");
-    unlock();
-  });
-
-  document.getElementById("btn-owner-reset").addEventListener("click", () => {
-    localStorage.removeItem(ACCESS_KEY);
-    lock();
-  });
 </script>
 
 </body>
