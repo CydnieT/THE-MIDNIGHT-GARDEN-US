@@ -149,6 +149,7 @@
 
     .paywall-box {
       max-width: 760px;
+      width: 100%;
       border: 1px solid #3a2f23;
       background: rgba(10,10,10,.86);
       border-radius: 12px;
@@ -164,6 +165,9 @@
       overflow: hidden;
     }
   </style>
+
+  <!-- Load Stripe Buy Button script ONCE -->
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 
 <body class="locked">
@@ -177,14 +181,14 @@
 </header>
 
 <!-- PAYWALL -->
-<section id="paywall">
+<section id="paywall" aria-label="Paywall">
   <div class="paywall-box">
     <h2>Empress Dashboard Access</h2>
     <p>Pay once. Then you enter.</p>
 
-    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+    <!-- Use ONLY your NEW Buy Button ID -->
     <stripe-buy-button
-      buy-button-id="buy_btn_1Sxu7QGV2xsfnUdimr2Leoaq"
+      buy-button-id="buy_btn_1SynGCGV2xsfnUdijTavY3ct"
       publishable-key="pk_live_51SZ0N2GV2xsfnUdiE23lOoDiQOQWGsOblZ87tDXAjSY7P5B2LfKCwNDOJfmosf2uXVfRXoUfQAT9JdxW2FyLd5z80087XK334j">
     </stripe-buy-button>
   </div>
@@ -203,13 +207,13 @@
 
     <div class="grid">
       <div class="card">
-        <img src="images/midnight-garden-collection-cover.png">
+        <img src="images/midnight-garden-collection-cover.png" alt="Drop PDF Portrait">
         <h3>Drop PDF (Portrait)</h3>
         <a href="downloads/gate0-portrait.pdf" download>Download</a>
       </div>
 
       <div class="card">
-        <img src="images/mg-main-cover.webp">
+        <img src="images/mg-main-cover.webp" alt="Drop PDF Square">
         <h3>Drop PDF (Square)</h3>
         <a href="downloads/gate0-square.pdf" download>Download</a>
       </div>
@@ -221,13 +225,13 @@
 
     <div class="grid">
       <div class="card">
-        <img src="images/wealth-altar-dashboard.png">
+        <img src="images/wealth-altar-dashboard.png" alt="Wealth Altar Dashboard">
         <h3>Wealth Altar Dashboard</h3>
         <a href="downloads/wealth-altar.pdf" download>Download</a>
       </div>
 
       <div class="card">
-        <img src="images/midnight-routine-planner.png">
+        <img src="images/midnight-routine-planner.png" alt="Midnight Routine Planner">
         <h3>Midnight Routine Planner</h3>
         <a href="downloads/midnight-routine.pdf" download>Download</a>
       </div>
@@ -240,17 +244,25 @@
 </div>
 
 <script>
+  // Persist access after first redirect with ?paid=1
   const params = new URLSearchParams(location.search);
+
   if (params.get("paid") === "1") {
     localStorage.setItem("TMG_ACCESS", "true");
     params.delete("paid");
-    history.replaceState({}, "", location.pathname);
+    history.replaceState({}, "", location.pathname + (params.toString() ? "?" + params.toString() : ""));
   }
 
-  if (localStorage.getItem("TMG_ACCESS") === "true") {
+  const hasAccess = (localStorage.getItem("TMG_ACCESS") === "true");
+
+  if (hasAccess) {
     document.body.classList.remove("locked");
     document.getElementById("paywall").style.display = "none";
     document.getElementById("dashboard-content").style.display = "block";
+  } else {
+    document.body.classList.add("locked");
+    document.getElementById("paywall").style.display = "flex";
+    document.getElementById("dashboard-content").style.display = "none";
   }
 </script>
 
