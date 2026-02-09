@@ -179,6 +179,10 @@
       line-height: 1.5;
     }
 
+    .tiny code {
+      color: #f1e9d8;
+    }
+
     /* Hide dashboard content until unlocked */
     #dashboard-content {
       display: none;
@@ -188,6 +192,28 @@
     body.locked {
       overflow: hidden;
     }
+
+    /* Owner tools (for testing) */
+    .owner-tools {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .owner-tools button {
+      background: transparent;
+      color: #f1e9d8;
+      border: 1px solid rgba(241,233,216,.25);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      letter-spacing: .6px;
+    }
+    .owner-tools button:hover { border-color: #b89c59; }
+
   </style>
 </head>
 
@@ -212,15 +238,20 @@
 
     <!-- STRIPE BUY BUTTON -->
     <script async src="https://js.stripe.com/v3/buy-button.js"></script>
-
     <stripe-buy-button
       buy-button-id="buy_btn_1Sxu7QGV2xsfnUdimr2Leoaq"
       publishable-key="pk_live_51SZ0N2GV2xsfnUdiE23lOoDiQOQWGsOblZ87tDXAjSY7P5B2LfKCwNDOJfmosf2uXVfRXoUfQAT9JdxW2FyLd5z80087XK334j">
     </stripe-buy-button>
 
     <div class="tiny">
-      Already paid? You must be redirected back here with access enabled.<br>
-      If your Stripe redirect isn’t set yet, set it to: <b>dashboard.html?paid=1</b>
+      After purchase, Stripe should redirect here once with <code>?paid=1</code> and we’ll remember access on this device.<br>
+      Redirect URL should be:<br>
+      <code>https://cydniet.github.io/THE-MIDNIGHT-GARDEN-US/dashboard.html?paid=1</code>
+    </div>
+
+    <div class="owner-tools" aria-label="Owner tools">
+      <button type="button" id="btn-owner-unlock">Owner Unlock (this device)</button>
+      <button type="button" id="btn-owner-reset">Reset Access (this device)</button>
     </div>
   </div>
 </section>
@@ -296,22 +327,55 @@
 </div>
 
 <script>
-  // Unlock rule: only show dashboard when URL has ?paid=1 (or ?paid=true)
+  // ===== FIXED PAYWALL LOGIC (PERSISTENT) =====
+  // Your old code ONLY unlocked when ?paid=1 was present. That's why it "kept making you pay".
+  // This version stores access in localStorage after the first successful redirect.
+
+  const ACCESS_KEY = "TMG_DASH_ACCESS_v1";
   const params = new URLSearchParams(window.location.search);
   const paid = params.get("paid");
 
-  const isUnlocked = (paid === "1" || paid === "true" || paid === "yes");
+  const paidThisVisit = (paid === "1" || paid === "true" || paid === "yes");
 
-  if (isUnlocked) {
-    document.body.classList.remove("locked");
-    document.getElementById("paywall").style.display = "none";
-    document.getElementById("dashboard-content").style.display = "block";
-  } else {
-    // Keep it locked. No preview. No scroll. No dashboard visible.
+  // If Stripe sends ?paid=1, remember access on this device
+  if (paidThisVisit) {
+    localStorage.setItem(ACCESS_KEY, "true");
+
+    // Clean URL so users can bookmark / return without ?paid=1
+    params.delete("paid");
+    const cleanUrl = window.location.pathname + (params.toString() ? "?" + params.toString() : "");
+    window.history.replaceState({}, "", cleanUrl);
+  }
+
+  function lock() {
     document.body.classList.add("locked");
     document.getElementById("paywall").style.display = "flex";
     document.getElementById("dashboard-content").style.display = "none";
   }
+
+  function unlock() {
+    document.body.classList.remove("locked");
+    document.getElementById("paywall").style.display = "none";
+    document.getElementById("dashboard-content").style.display = "block";
+  }
+
+  // Determine access
+  const hasAccess = (localStorage.getItem(ACCESS_KEY) === "true");
+
+  // Apply state
+  if (hasAccess) unlock();
+  else lock();
+
+  // Owner tools (testing / admin)
+  document.getElementById("btn-owner-unlock").addEventListener("click", () => {
+    localStorage.setItem(ACCESS_KEY, "true");
+    unlock();
+  });
+
+  document.getElementById("btn-owner-reset").addEventListener("click", () => {
+    localStorage.removeItem(ACCESS_KEY);
+    lock();
+  });
 </script>
 
 </body>
