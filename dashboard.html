@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Empress Dashboard · The Midnight Garden</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0b;
+      font-family: "Inter", sans-serif;
+      color: #f1e9d8;
+    }
+
+    header {
+      padding: 16px 28px;
+      border-bottom: 1px solid #3a2f23;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #050505cc;
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    header .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    header nav a {
+      color: #f1e9d8;
+      margin-left: 18px;
+      font-size: 14px;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 36px;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #d2c4ab;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .section {
+      padding: 40px 20px 50px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      color: #c8b89d;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #3a2f23;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      border: 1px solid #2c2419;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin: 8px 0;
+      font-family: "Playfair Display", serif;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 14px;
+      border: 1px solid #b89c59;
+      color: #f1e9d8;
+      text-decoration: none;
+      letter-spacing: 1px;
+      font-size: 13px;
+    }
+
+    .card a:hover {
+      background: #b89c59;
+      color: #0b0b0b;
+    }
+
+    footer {
+      padding: 35px;
+      text-align: center;
+      font-size: 13px;
+      color: #8c806a;
+      border-top: 1px solid #3a2f23;
+      margin-top: 50px;
+    }
+
+    /* PAYWALL */
+    #paywall {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(1200px 800px at 50% 20%, rgba(184,156,89,.12), rgba(0,0,0,.94));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .paywall-box {
+      max-width: 760px;
+      width: 100%;
+      border: 1px solid #3a2f23;
+      background: rgba(10,10,10,.86);
+      border-radius: 12px;
+      padding: 28px 22px;
+      text-align: center;
+    }
+
+    #dashboard-content {
+      display: none;
+    }
+
+    body.locked {
+      overflow: hidden;
+    }
+  </style>
+
+  <!-- Load Stripe Buy Button script ONCE -->
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+</head>
+
+<body class="locked">
+
+<header>
+  <div class="logo">THE MIDNIGHT GARDEN</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html" aria-current="page">Dashboard</a>
+  </nav>
+</header>
+
+<!-- PAYWALL -->
+<section id="paywall" aria-label="Paywall">
+  <div class="paywall-box">
+    <h2>Empress Dashboard Access</h2>
+    <p>Pay once. Then you enter.</p>
+
+    <!-- Use ONLY your NEW Buy Button ID -->
+    <stripe-buy-button
+      buy-button-id="buy_btn_1SynGCGV2xsfnUdijTavY3ct"
+      publishable-key="pk_live_51SZ0N2GV2xsfnUdiE23lOoDiQOQWGsOblZ87tDXAjSY7P5B2LfKCwNDOJfmosf2uXVfRXoUfQAT9JdxW2FyLd5z80087XK334j">
+    </stripe-buy-button>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<div id="dashboard-content">
+
+  <div class="hero">
+    <h1>Empress Dashboard</h1>
+    <p>Your personal command center.</p>
+  </div>
+
+  <section class="section">
+    <h2>January Gate 0 Drop</h2>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/midnight-garden-collection-cover.png" alt="Drop PDF Portrait">
+        <h3>Drop PDF (Portrait)</h3>
+        <a href="downloads/gate0-portrait.pdf" download>Download</a>
+      </div>
+
+      <div class="card">
+        <img src="images/mg-main-cover.webp" alt="Drop PDF Square">
+        <h3>Drop PDF (Square)</h3>
+        <a href="downloads/gate0-square.pdf" download>Download</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Permanent Tools</h2>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/wealth-altar-dashboard.png" alt="Wealth Altar Dashboard">
+        <h3>Wealth Altar Dashboard</h3>
+        <a href="downloads/wealth-altar.pdf" download>Download</a>
+      </div>
+
+      <div class="card">
+        <img src="images/midnight-routine-planner.png" alt="Midnight Routine Planner">
+        <h3>Midnight Routine Planner</h3>
+        <a href="downloads/midnight-routine.pdf" download>Download</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © The Midnight Garden · 2026
+  </footer>
+</div>
+
+<script>
+  // Persist access after first redirect with ?paid=1
+  const params = new URLSearchParams(location.search);
+
+  if (params.get("paid") === "1") {
+    localStorage.setItem("TMG_ACCESS", "true");
+    params.delete("paid");
+    history.replaceState({}, "", location.pathname + (params.toString() ? "?" + params.toString() : ""));
+  }
+
+  const hasAccess = (localStorage.getItem("TMG_ACCESS") === "true");
+
+  if (hasAccess) {
+    document.body.classList.remove("locked");
+    document.getElementById("paywall").style.display = "none";
+    document.getElementById("dashboard-content").style.display = "block";
+  } else {
+    document.body.classList.add("locked");
+    document.getElementById("paywall").style.display = "flex";
+    document.getElementById("dashboard-content").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
